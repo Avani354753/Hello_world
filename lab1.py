@@ -2,7 +2,7 @@
 age = 30
 price = 9.99
 name = "Alice"
-is_student = True
+is_student = True 
 
 # Perform arithmetic operations
 sum_value = age + 10
@@ -15,7 +15,7 @@ print("Name:", name)
 print("Is student:", is_student)
 print("Sum value:", sum_value)
 print("Product value:", product_value)
-print()
+print("")
 print(type(price))
 print(type(age))
 print(type(name))
