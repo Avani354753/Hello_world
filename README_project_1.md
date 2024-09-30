@@ -21,3 +21,4 @@ To install the Student Managament system, simply clone this repository and run t
     * Calculate class average: View average score of all students.
     * Exit: Exit program
 3. Follow prompt to completethe chosen action.
+
