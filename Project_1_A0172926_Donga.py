@@ -1,4 +1,5 @@
 # project 1
+# Student Management system
 
 def calculate_average(numbers):
     """Calculate the average of a list of numbers."""
