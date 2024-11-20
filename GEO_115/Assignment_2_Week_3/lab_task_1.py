@@ -4,7 +4,7 @@ price = 9.99
 name = "Alice"
 is_student = True 
 
-# Perform arithmetic operations
+# Perform Arithmetic operations
 sum_value = age + 10
 product_value = price * 2
 
