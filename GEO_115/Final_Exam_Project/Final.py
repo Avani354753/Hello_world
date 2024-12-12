@@ -6,16 +6,20 @@ def csv_to_shapefile(input_csv_file, output_shapefile):
     """Converts a CSV file to a shapefile."""
     
     # Define the spatial reference (e.g., WGS 1984)
+    # This sets the coordinate system for the shapefile
     spatial_reference = arcpy.SpatialReference(4326)
 
     # Extract the output path and name
+    # This splits the output shapefile path into directory and file name
     out_path, out_name = os.path.split(output_shapefile)
 
     # Delete the shapefile if it already exists
+    # This ensures that an existing shapefile with the same name is removed before creating a new one
     if arcpy.Exists(output_shapefile):
         arcpy.management.Delete(output_shapefile)
 
     # Create a new feature class
+    # This creates a new shapefile with point geometry and the specified spatial reference
     arcpy.management.CreateFeatureclass(
         out_path=out_path,
         out_name=out_name,
@@ -24,6 +28,7 @@ def csv_to_shapefile(input_csv_file, output_shapefile):
     )
 
     # Add fields to the feature class
+    # Open the CSV file and read the header row to get the field names
     with open(input_csv_file, mode='r', newline='') as csvfile:
         csvreader = csv.reader(csvfile)
         header = next(csvreader)  # Read the header row
@@ -35,6 +40,7 @@ def csv_to_shapefile(input_csv_file, output_shapefile):
             arcpy.management.AddField(output_shapefile, field_name, "TEXT")
 
     # Insert rows into the feature class
+    # Open the CSV file again to read the data rows
     with open(input_csv_file, mode='r', newline='') as csvfile:
         csvreader = csv.reader(csvfile)
         header = next(csvreader)  # Read the header row
@@ -49,6 +55,7 @@ def csv_to_shapefile(input_csv_file, output_shapefile):
         del cursor
 
     # Add the shapefile to the current map
+    # This adds the newly created shapefile to the current map in ArcGIS Pro
     try:
         aprx = arcpy.mp.ArcGISProject("CURRENT")
         map = aprx.listMaps()[0]  # Get the first map in the project
