@@ -49,10 +49,13 @@ def csv_to_shapefile(input_csv_file, output_shapefile):
         del cursor
 
     # Add the shapefile to the current map
-    aprx = arcpy.mp.ArcGISProject("CURRENT")
-    map = aprx.activeMap
-    map.addDataFromPath(output_shapefile)
-    arcpy.AddMessage(f"Shapefile created and added to the map: {output_shapefile}")
+    try:
+        aprx = arcpy.mp.ArcGISProject("CURRENT")
+        map = aprx.listMaps()[0]  # Get the first map in the project
+        map.addDataFromPath(output_shapefile)
+        arcpy.AddMessage(f"Shapefile created and added to the map: {output_shapefile}")
+    except Exception as e:
+        arcpy.AddError(f"Error adding shapefile to the map: {e}")
 
 # Example usage
 input_csv_file = r"D:\GEO 115\Final project\Planning_Local_Government_-7120577768134160590.csv"
